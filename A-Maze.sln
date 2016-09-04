@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A-Maze.UI", "A-Maze.UI\A-Maze.UI.csproj", "{A7A30264-E745-41C2-AFEF-E0841B207674}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A-Maze", "A-Maze\A-Maze.csproj", "{6C45B03E-ACEC-4F3F-9AF7-00BF8BC05D69}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7A30264-E745-41C2-AFEF-E0841B207674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7A30264-E745-41C2-AFEF-E0841B207674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7A30264-E745-41C2-AFEF-E0841B207674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7A30264-E745-41C2-AFEF-E0841B207674}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C45B03E-ACEC-4F3F-9AF7-00BF8BC05D69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C45B03E-ACEC-4F3F-9AF7-00BF8BC05D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C45B03E-ACEC-4F3F-9AF7-00BF8BC05D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C45B03E-ACEC-4F3F-9AF7-00BF8BC05D69}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
