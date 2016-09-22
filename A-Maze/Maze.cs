@@ -12,30 +12,34 @@ namespace A_Maze
         {
             Grid = new Cell[xSize, ySize];
             int count = 0;
+
+            // Initialise grid
             for (int x = 0; x < xSize; x++)
             {
                 for (int y = 0; y < ySize; y++)
                 {
-                    Grid[x, y] = Grid[x, y] ?? new Cell(count++);
-
-                    // Populate neighbours
-                    if (y - 1 >= 0) // go down
-                    {
-                        Grid[x, y].Neighbours[0] = GetNeighbour(Grid, x, y - 1);
-                    }
-                    if (x - 1 >= 0) // go left
-                    {
-                        Grid[x, y].Neighbours[1] = GetNeighbour(Grid, x - 1, y);
-                    }
-                    if (y + 1 < ySize) // go up
-                    {
-                        Grid[x, y].Neighbours[2] = GetNeighbour(Grid, x, y + 1); 
-                    }
-                    if (x + 1 < xSize) // go right
-                    {
-                        Grid[x, y].Neighbours[3] = GetNeighbour(Grid, x + 1, y);
-                    }
+                    Grid[x, y] = new Cell(count++);
                 }
+            }
+
+            // Set neighbours
+            for (int x = 0; x < xSize; x++)
+            {
+                for (int y = 0; y < ySize; y++)
+                {
+                    AddNeighbour(Grid[x, y], 0, (y - 1 >= 0), x, y - 1);
+                    AddNeighbour(Grid[x, y], 1, (x - 1 >= 0), x - 1, y);
+                    AddNeighbour(Grid[x, y], 2, (y + 1 < ySize), x, y + 1);
+                    AddNeighbour(Grid[x, y], 3, (x + 1 < xSize), x + 1, y);
+                }
+            }
+        }
+
+        private void AddNeighbour(Cell cell, int neighourIndex, bool inBounds, int x, int y)
+        {
+            if (inBounds) // go down
+            {
+                cell.Neighbours[neighourIndex] = Grid[x, y];
             }
         }
 
@@ -48,8 +52,7 @@ namespace A_Maze
 
             return grid[x, y];
         }
-
-
+        
         public void BuildMaze()
         {
             Cell current = Grid[0, 0];

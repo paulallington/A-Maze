@@ -55,8 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="UserControlExtensions.cs" />
-    <Compile Include="WindowExtensions.cs" />
+    <Compile Include="Extensions\UserControlExtensions.cs" />
+    <Compile Include="Extensions\WindowExtensions.cs" />
     <Page Include="CellImage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

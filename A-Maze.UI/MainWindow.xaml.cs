@@ -5,15 +5,16 @@ namespace A_Maze
 {
     public partial class MainWindow : Window
     {
-        public
-            Maze Maze;
+        public Maze Maze;
         public Cell[,] Grid => Maze.Grid;
+        List<List<Cell>> lsts = new List<List<Cell>>();
 
 
         public MainWindow()
         {
             InitializeComponent();
             GenerateMaze();
+            MazeGrid.ItemsSource = lsts;
         }
 
         public void GenerateMaze()
@@ -23,7 +24,6 @@ namespace A_Maze
 
             Maze = new Maze(width, height);
 
-            List<List<Cell>> lsts = new List<List<Cell>>();
             for (int x = 0; x < width; x++)
             {
                 lsts.Add(new List<Cell>());
@@ -33,10 +33,6 @@ namespace A_Maze
                     lsts[x].Add(Maze.Grid[x, y]);
                 }
             }
-
-            InitializeComponent();
-
-            MazeGrid.ItemsSource = lsts;
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)

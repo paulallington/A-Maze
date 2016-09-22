@@ -6,8 +6,6 @@ namespace A_Maze
 {
     public partial class CellImage : UserControl
     {
-        private const int borderThickness = 2;
-
         public Cell CellValue { get; set; }
 
         public static readonly DependencyProperty CellPropertyProperty = DependencyProperty.Register("CellProperty", typeof(Cell), typeof(CellImage), new PropertyMetadata(default(Cell), new PropertyChangedCallback(OnTextChanged)));
@@ -38,19 +36,7 @@ namespace A_Maze
 
             //this.FindParentWindow().UiInvoke(() => IdLabel.Content = "d");
         }
-
-        private static void InvokeAction(Action action)
-        {
-            try
-            {
-                action();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error invoking action: " + ex.Message);
-            }
-        }
-
+        
         public CellImage()
         {
             InitializeComponent();
