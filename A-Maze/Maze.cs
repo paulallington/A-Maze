@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace A_Maze
 {
     public class Maze
     {
         public readonly Cell[,] Grid;
+        public event EventHandler<Tuple<Cell, Cell>> CellVisited; 
 
         public Maze(int xSize, int ySize) 
         {
             Grid = new Cell[xSize, ySize];
-            int count = 0;
 
             // Initialise grid
             for (int x = 0; x < xSize; x++)
             {
                 for (int y = 0; y < ySize; y++)
                 {
-                    Grid[x, y] = new Cell(count++);
+                    Grid[x, y] = new Cell(x, y);
                 }
             }
 
@@ -42,16 +43,6 @@ namespace A_Maze
                 cell.Neighbours[neighourIndex] = Grid[x, y];
             }
         }
-
-        private Cell GetNeighbour(Cell[,] grid, int x, int y)
-        {
-            if (grid[x, y] == null)
-            {
-                grid[x, y] = new Cell(0);
-            }
-
-            return grid[x, y];
-        }
         
         public void BuildMaze()
         {
@@ -71,6 +62,7 @@ namespace A_Maze
                 else
                 {
                     current.AddPath(next);
+                    CellVisited?.Invoke(this, new Tuple<Cell, Cell>(current, next));
                     cellStack.Push(current);
                 }
 

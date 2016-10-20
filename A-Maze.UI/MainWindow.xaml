@@ -5,29 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:A_Maze"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Window.Resources>
-        <DataTemplate x:Key="CellTemplate">  
-            <local:CellImage Width="10" Height="10" CellProperty="{Binding}"></local:CellImage>
-            <!--<Button Content="{Binding}"></Button>-->
-        </DataTemplate>
-
-        <DataTemplate x:Key="MazeTemplate">
-            <ItemsControl ItemsSource="{Binding}" ItemTemplate="{StaticResource CellTemplate}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </DataTemplate>
-
-    </Window.Resources>
-    <Grid Name="MainGrid">
-        <StackPanel>
-            <ItemsControl x:Name="MazeGrid" ItemTemplate="{DynamicResource MazeTemplate}">
-            </ItemsControl>
-            <Button x:Name="StartButton" Content="Button" HorizontalAlignment="Left" Width="517" Click="StartButton_Click"/>
-        </StackPanel>
+        Title="A-Maze" Height="350" Width="525">
+    <Grid>
+        <Canvas Name="Surface" Height="Auto" Width="Auto" Background="White"></Canvas>
     </Grid>
 </Window>

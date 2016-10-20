@@ -7,14 +7,15 @@ namespace A_Maze
 {
     public class Cell
     {
-        public int Id;
+        public int X, Y;
         public Cell[] Neighbours = new Cell[4];
         public bool Visited;
         public ObservableCollection<Cell> Paths = new ObservableCollection<Cell>(); 
 
-        public Cell(int id)
+        public Cell(int x, int y)
         {
-            Id = id;
+            X = x;
+            Y = y;
         }
 
         public Cell PickUnvisitedNeighbour(Random random)
