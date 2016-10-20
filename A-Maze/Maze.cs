@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 
@@ -7,11 +8,16 @@ namespace A_Maze
 {
     public class Maze
     {
+        private readonly int _xSize;
+        private readonly int _ySize;
         public readonly Cell[,] Grid;
-        public event EventHandler<Tuple<Cell, Cell>> CellVisited; 
+        public event EventHandler<Tuple<Cell, Cell>> CellVisited;
+        public event EventHandler<SolvedCell> CellSolved;
 
         public Maze(int xSize, int ySize) 
         {
+            _xSize = xSize;
+            _ySize = ySize;
             Grid = new Cell[xSize, ySize];
 
             // Initialise grid
@@ -69,6 +75,45 @@ namespace A_Maze
                 current = next;
             }
             while (cellStack.Any());
+        }
+
+        /// <summary>
+        /// Just...because
+        /// </summary>
+        public void Solve()
+        {
+            Cell startCell = Grid[0, 0];
+            Cell currentCell = Grid[0, 0];
+            Cell endCell = Grid[_xSize - 1, _ySize -1];
+
+            CellSolved?.Invoke(this, new SolvedCell(startCell, SolveType.Start));
+            CellSolved?.Invoke(this, new SolvedCell(endCell, SolveType.Start));
+
+            List<Cell> open = new List<Cell>();
+            List<Cell> closed = new List<Cell>();
+            
+            while (currentCell != endCell)
+            {
+                foreach (var cell in currentCell.Paths)
+                {
+                    cell.CalculateCosts(currentCell, startCell, endCell);
+                }
+
+                open.AddRange(currentCell.Paths);
+
+                CellSolved?.Invoke(this, new SolvedCell(currentCell, SolveType.Path));
+                closed.Add(currentCell);
+                var nextCell = currentCell.Paths.Except(closed).OrderBy(x => x.F).FirstOrDefault();
+                while (nextCell == null)
+                {
+                    CellSolved?.Invoke(this, new SolvedCell(currentCell, SolveType.Block));
+                    currentCell = currentCell.PreviousCell;
+                    nextCell = currentCell.Paths.Except(closed).OrderBy(x => x.F).FirstOrDefault();
+                }
+
+                nextCell.PreviousCell = currentCell;
+                currentCell = nextCell;
+            }
         }
     }
 }
